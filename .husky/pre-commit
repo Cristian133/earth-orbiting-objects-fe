@@ -1,0 +1,10 @@
+#!/usr/bin/env sh
+
+# Run lint-staged on staged files
+npx lint-staged
+
+# Run tests (non-watch mode)
+npm test -- --no-watch
+
+# Run production build
+npm run build

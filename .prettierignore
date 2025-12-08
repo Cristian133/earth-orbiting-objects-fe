@@ -1,0 +1,23 @@
+# Build outputs
+dist/
+.angular/
+coverage/
+
+# Dependencies
+node_modules/
+
+# Logs
+*.log
+
+# Lock files
+package-lock.json
+pnpm-lock.yaml
+yarn.lock
+
+# Editor
+.vscode/
+.idea/
+
+# OS
+.DS_Store
+Thumbs.db
