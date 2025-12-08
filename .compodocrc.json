@@ -1,0 +1,17 @@
+{
+  "name": "Object Orbiting Earth",
+  "output": "docs",
+  "tsconfig": "tsconfig.app.json",
+  "theme": "material",
+  "hideGenerator": true,
+  "disableCoverage": false,
+  "disablePrivate": true,
+  "disableProtected": false,
+  "disableInternal": false,
+  "disableLifeCycleHooks": false,
+  "disableRoutesGraph": false,
+  "disableSearch": false,
+  "includes": "README.md",
+  "includesName": "Documentation",
+  "customFavicon": "public/favicon.ico"
+}

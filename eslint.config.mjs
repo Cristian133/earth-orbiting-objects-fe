@@ -1,3 +1,6 @@
+// For more info, see https://github.com/storybookjs/eslint-plugin-storybook#configuration-flat-config-format
+import storybook from 'eslint-plugin-storybook';
+
 import eslint from '@eslint/js';
 import tseslint from 'typescript-eslint';
 import angular from '@angular-eslint/eslint-plugin';
@@ -9,14 +12,21 @@ import prettierPlugin from 'eslint-plugin-prettier';
 
 export default tseslint.config(
   {
-    ignores: ['dist/**', '.angular/**', 'node_modules/**', 'coverage/**'],
-  },
-  // Base config for JavaScript files
+    ignores: [
+      'dist/**',
+      '.angular/**',
+      'node_modules/**',
+      'coverage/**',
+      'vitest.config.ts',
+      'playwright.config.ts',
+      'e2e/**',
+      '.storybook/**',
+    ],
+  }, // Base config for JavaScript files
   {
     files: ['**/*.js', '**/*.mjs'],
     ...eslint.configs.recommended,
-  },
-  // TypeScript-specific configuration
+  }, // TypeScript-specific configuration
   {
     files: ['**/*.ts'],
     extends: [...tseslint.configs.strictTypeChecked, ...tseslint.configs.stylisticTypeChecked],
@@ -71,8 +81,14 @@ export default tseslint.config(
         },
       ],
     },
-  },
-  // HTML template-specific configuration
+  }, // Relaxed rules for Storybook stories
+  {
+    files: ['src/stories/**/*.ts'],
+    rules: {
+      '@angular-eslint/component-selector': 'off',
+      '@angular-eslint/directive-selector': 'off',
+    },
+  }, // HTML template-specific configuration
   {
     files: ['**/*.html'],
     plugins: {
@@ -94,8 +110,7 @@ export default tseslint.config(
       '@angular-eslint/template/use-track-by-function': 'error',
       '@angular-eslint/template/prefer-self-closing-tags': 'error',
     },
-  },
-  // Relaxed rules for test files
+  }, // Relaxed rules for test files
   {
     files: ['**/*.spec.ts'],
     rules: {
@@ -104,5 +119,6 @@ export default tseslint.config(
       '@typescript-eslint/no-unsafe-member-access': 'off',
       '@typescript-eslint/no-unsafe-call': 'off',
     },
-  }
+  },
+  storybook.configs['flat/recommended']
 );

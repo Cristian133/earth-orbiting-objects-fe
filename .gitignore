@@ -39,6 +39,28 @@ testem.log
 __screenshots__/
 .eslintcache
 
+# Documentation
+/docs
+/.compodoc
+
+# E2E Testing
+/playwright-report
+/test-results
+/.playwright
+
+# Performance
+/.lighthouseci
+/lighthouse-reports
+
+# Storybook
+/storybook-static
+
+# Local environment files
+src/environments/environment.local.ts
+src/environments/*.local.ts
+
 # System files
 .DS_Store
 Thumbs.db
+
+*storybook.log

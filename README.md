@@ -1,31 +1,33 @@
 # Object Orbiting Earth 🌍🛰️
 
-A modern Angular application for visualizing and tracking objects orbiting Earth. Built with Angular 21, TypeScript, and following best practices for code quality and maintainability.
+A modern Angular application for visualizing and tracking objects orbiting Earth. Built with Angular 21, TypeScript, and following best practices for code quality, testing, documentation, and performance.
 
 ## 📋 Table of Contents
 
 - [Features](#features)
 - [Prerequisites](#prerequisites)
 - [Getting Started](#getting-started)
-- [Development Workflow](#development-workflow)
-- [Code Quality](#code-quality)
+- [Development Commands](#development-commands)
+- [Project Structure](#project-structure)
+- [Code Quality Tools](#code-quality-tools)
 - [Testing](#testing)
-- [Building](#building)
+- [Documentation](#documentation)
+- [Performance \u0026 PWA](#performance--pwa)
 - [Contributing](#contributing)
-- [License](#license)
 
 ## ✨ Features
 
-- Real-time visualization of orbiting objects
-- Modern Angular 21 with standalone components
-- TypeScript strict mode
-- Comprehensive linting and formatting
-- Automated code quality checks
-- Pre-commit hooks for consistent code quality
+- **Modern Angular 21** with standalone components
+- **TypeScript Strict Mode** for type safety
+- **Path Aliases** for clean imports (`@app/`, `@core/`, `@shared/`)
+- **Multi-Environment** support (dev, staging, production)
+- **Comprehensive Testing** (Unit + E2E)
+- **Automated Documentation** with Compodoc
+- **PWA** with offline support
+- **Performance Monitoring** with Lighthouse CI
+- **Pre-commit Hooks** ensuring code quality
 
 ## 🔧 Prerequisites
-
-Before you begin, ensure you have the following installed:
 
 - **Node.js**: v20.x or higher
 - **npm**: v11.6.2 or higher
@@ -33,225 +35,276 @@ Before you begin, ensure you have the following installed:
 
 ## 🚀 Getting Started
 
-### Installation
-
-1. Clone the repository:
-
-   ```bash
-   git clone <repository-url>
-   cd object-orbiting-earth-frontend
-   ```
-
-2. Install dependencies:
-
-   ```bash
-   npm install
-   ```
-
-3. Start the development server:
-
-   ```bash
-   npm start
-   ```
-
-4. Open your browser and navigate to `http://localhost:4200/`
-
-The application will automatically reload when you modify source files.
-
-## 💻 Development Workflow
-
-### Available Scripts
-
-| Command                | Description                                         |
-| ---------------------- | --------------------------------------------------- |
-| `npm start`            | Start development server on `http://localhost:4200` |
-| `npm run build`        | Build the project for production                    |
-| `npm test`             | Run unit tests with Vitest                          |
-| `npm run lint`         | Check code for linting errors                       |
-| `npm run lint:fix`     | Auto-fix linting errors                             |
-| `npm run format`       | Format all source files with Prettier               |
-| `npm run format:check` | Check if files are properly formatted               |
-
-### Code Scaffolding
-
-Generate new components, services, or other Angular elements:
-
 ```bash
-ng generate component component-name
-ng generate service service-name
-ng generate directive directive-name
+# Clone the repository
+git clone <repository-url>
+cd object-orbiting-earth-frontend
+
+# Install dependencies
+npm install
+
+# Start development server
+npm start
 ```
 
-For a complete list of available schematics:
+Open `http://localhost:4200/` in your browser.
 
-```bash
-ng generate --help
+## 💻 Development Commands
+
+### Core Development
+
+| Command                 | Description                                    |
+| ----------------------- | ---------------------------------------------- |
+| `npm start`             | Development server (port 4200)                 |
+| `npm run start:staging` | Development server with staging config         |
+| `npm run build`         | Production build                               |
+| `npm run build:staging` | Staging build                                  |
+| `npm test`              | Run unit tests                                 |
+| `npm run test:coverage` | Run tests with coverage report (80% threshold) |
+
+### Code Quality
+
+| Command                | Description               |
+| ---------------------- | ------------------------- |
+| `npm run lint`         | Check code with ESLint    |
+| `npm run lint:fix`     | Auto-fix ESLint issues    |
+| `npm run format`       | Format code with Prettier |
+| `npm run format:check` | Check code formatting     |
+
+### Documentation
+
+| Command                 | Description                        |
+| ----------------------- | ---------------------------------- |
+| `npm run docs:generate` | Generate documentation             |
+| `npm run docs:serve`    | Serve documentation locally        |
+| `npm run docs:build`    | Build documentation for deployment |
+
+### E2E Testing
+
+| Command              | Description                 |
+| -------------------- | --------------------------- |
+| `npm run e2e`        | Run E2E tests (headless)    |
+| `npm run e2e:headed` | Run E2E tests (headed mode) |
+| `npm run e2e:debug`  | Debug E2E tests             |
+| `npm run e2e:ui`     | Open Playwright UI          |
+
+### Performance \u0026 Security
+
+| Command                  | Description                        |
+| ------------------------ | ---------------------------------- |
+| `npm run lighthouse`     | Run Lighthouse performance audit   |
+| `npm run security:audit` | Check for security vulnerabilities |
+| `npm run security:check` | Security audit with moderate level |
+
+### Component Development
+
+| Command                                        | Description     |
+| ---------------------------------------------- | --------------- |
+| `ng run object-orbiting-earth:storybook`       | Start Storybook |
+| `ng run object-orbiting-earth:build-storybook` | Build Storybook |
+
+## 📁 Project Structure
+
+```
+src/
+├── app/
+│   ├── core/          # Core services, guards, interceptors
+│   ├── shared/        # Shared components, pipes, directives
+│   ├── features/      # Feature modules
+│   └── app.ts         # Main app component
+├── environments/      # Environment configurations
+│   ├── environment.ts           # Development
+│   ├── environment.staging.ts   # Staging
+│   └── environment.prod.ts      # Production
+└── assets/           # Static assets
 ```
 
-## 🎯 Code Quality
+### Path Aliases
 
-This project enforces strict code quality standards using multiple tools:
+Use clean imports with configured path aliases:
+
+```typescript
+// ❌ Bad
+import { Service } from '../../../core/services/service';
+
+// ✅ Good
+import { Service } from '@core/services/service';
+```
+
+Available aliases:
+
+- `@app/*` → `src/app/*`
+- `@core/*` `src/app/core/*`
+- `@shared/*` → `src/app/shared/*`
+- `@features/*` → `src/app/features/*`
+- `@environments/*` → `src/environments/*`
+
+## 🎯 Code Quality Tools
 
 ### ESLint
 
-Linting for TypeScript and Angular templates with strict type checking:
-
-- TypeScript strict mode
-- Angular-specific component and template rules
-- Template accessibility checks (WCAG compliance)
-- Automatic integration with Prettier
-
-**Configuration:** `eslint.config.mjs`
+- TypeScript strict type checking
+- Angular-specific rules
+- Template accessibility checks (WCAG)
+- Auto-integrated with Prettier
 
 ### Prettier
 
-Consistent code formatting across the entire codebase:
-
 - 100 character line width
-- Single quotes
-- 2 spaces indentation
-- Angular HTML parser for templates
-
-**Configuration:** `.prettierrc`
+- Single quotes, 2-space indentation
+- Angular HTML parser
 
 ### Commitlint
 
-Enforces [Conventional Commits](https://www.conventionalcommits.org/) specification for commit messages.
-
-**Format:** `type(scope?): subject`
-
-**Allowed types:**
-
-- `feat` - New feature
-- `fix` - Bug fix
-- `chore` - Maintenance tasks
-- `docs` - Documentation changes
-- `style` - Code style changes
-- `refactor` - Code refactoring
-- `test` - Test changes
-- `build` - Build system changes
-- `ci` - CI/CD changes
-- `perf` - Performance improvements
-- `revert` - Revert previous changes
-
-**Examples:**
+Enforces [Conventional Commits](https://www.conventionalcommits.org/):
 
 ```bash
 git commit -m "feat: add orbit visualization"
-git commit -m "fix(api): correct satellite data fetch"
-git commit -m "docs: update installation instructions"
+git commit -m "fix(api): correct satellite data"
+git commit -m "docs: update README"
 ```
 
-### Pre-commit Hooks (Husky)
+**Types**: `feat`, `fix`, `chore`, `docs`, `style`, `refactor`, `test`, `build`, `ci`, `perf`, `revert`
 
-Automatic checks run before each commit:
+### Pre-commit Hooks
 
-1. **Prettier** - Formats staged files
-2. **ESLint** - Lints and auto-fixes code
-3. **Tests** - Runs full test suite
-4. **Build** - Verifies production build
+Automatic checks before each commit:
 
-> **Note:** Pre-commit hooks ensure code quality but may take 20-30 seconds. To skip hooks in emergencies (not recommended):
->
-> ```bash
-> git commit --no-verify -m "message"
-> ```
+1. Format with Prettier (staged files only)
+2. Lint with ESLint
+3. Run unit tests (all)
+4. Production build validation
+
+> **Tip**: Use `git commit --no-verify` to skip hooks (use sparingly)
 
 ## 🧪 Testing
 
-This project uses [Vitest](https://vitest.dev/) for unit testing.
-
-**Run tests:**
+### Unit Tests (Vitest)
 
 ```bash
-npm test
+npm test                # Run tests
+npm run test:coverage   # With coverage report
+npm run test:watch      # Watch mode
 ```
 
-**Run tests in watch mode:**
+**Coverage Thresholds**: 80% lines, 75% branches, 80% functions
+
+### E2E Tests (Playwright)
 
 ```bash
-npm test -- --watch
+npm run e2e            # Run all E2E tests
+npm run e2e:headed     # See browser
+npm run e2e:debug      # Debug mode
+npm run e2e:ui         # Interactive UI
 ```
 
-Tests are automatically run as part of the pre-commit hook to ensure all changes pass before committing.
+**Browsers**: Chrome, Firefox, Safari (WebKit)
 
-## 📦 Building
+## 📚 Documentation
 
-Build the project for production:
+### Compodoc
+
+Auto-generated documentation from code comments:
 
 ```bash
-npm run build
+npm run docs:generate  # Generate docs
+npm run docs:serve     # View at http://localhost:8080
 ```
 
-Build artifacts will be stored in the `dist/` directory. The production build is optimized for performance and speed.
+### Storybook
 
-**Build outputs:**
+Component development environment:
 
-- Optimized bundles
-- Minified code
-- Tree-shaken dependencies
-- Source maps (optional)
+```bash
+ng run object-orbiting-earth:storybook
+# Opens at http://localhost:6006
+```
+
+## ⚡ Performance \u0026 PWA
+
+### Progressive Web App
+
+- **Offline Support**: Service worker caching
+- **Installable**: Add to home screen
+- **Fast Loading**: App shell architecture
+
+Manifest: `src/manifest.webmanifest`  
+Service Worker Config: `ngsw-config.json`
+
+### Lighthouse CI
+
+Performance budgets enforced:
+
+- **Performance**: 90%+
+- **Accessibility**: 90%+
+- **FCP**: < 2s
+- **LCP**: < 2.5s
+- **CLS**: < 0.1
+
+```bash
+npm run lighthouse  # Run performance audit
+```
 
 ## 🤝 Contributing
-
-We welcome contributions! Please follow these guidelines:
 
 ### Branch Naming
 
 - `feat/description` - New features
 - `fix/description` - Bug fixes
-- `chore/description` - Maintenance tasks
-- `docs/description` - Documentation updates
+- `chore/description` - Maintenance
+- `docs/description` - Documentation
 
 ### Commit Messages
 
-All commits must follow the [Conventional Commits](https://www.conventionalcommits.org/) specification. This is enforced by commitlint.
+Follow Conventional Commits (enforced by commitlint)
 
 ### Pull Request Process
 
-1. Fork the repository
-2. Create a feature branch from `main`
-3. Make your changes
-4. Ensure all tests pass (`npm test`)
-5. Ensure linting passes (`npm run lint`)
-6. Ensure formatting is correct (`npm run format:check`)
-7. Commit using conventional commit format
-8. Push to your fork and submit a pull request
+1. Fork and create feature branch
+2. Make changes
+3. Ensure all tests pass: `npm test`
+4. Ensure linting passes: `npm run lint`
+5. Ensure formatting is correct: `npm run format:check`
+6. Commit with conventional format
+7. Push and create pull request
 
-### Code Style
+### Code Standards
 
-- All code must pass ESLint checks
-- All code must be formatted with Prettier
-- Follow Angular style guide
-- Write meaningful tests for new features
-- Keep components small and focused
-- Use TypeScript features (types, interfaces, etc.)
+- TypeScript strict mode
+- ESLint + Prettier compliance
+- 80% test coverage minimum
+- Accessibility (WCAG AA)
+- Performance budgets met
 
 ## 🛠️ Tech Stack
 
-- **Framework:** Angular 21
-- **Language:** TypeScript 5.9
-- **Build Tool:** Angular Build System
-- **Testing:** Vitest 4.0
-- **Linting:** ESLint 9 with Angular ESLint
-- **Formatting:** Prettier 3
-- **Commit Linting:** Commitlint
-- **Git Hooks:** Husky 9
+**Core**:
 
-## 📝 VS Code Setup
+- Angular 21
+- TypeScript 5.9
+- RxJS 7.8
 
-For the best development experience, install the recommended VS Code extensions:
+**Development**:
 
-- Angular Language Service
-- ESLint
-- Prettier - Code formatter
+- ESLint 9 + Angular ESLint
+- Prettier 3
+- Husky 9 + lint-staged
 
-These extensions are listed in `.vscode/extensions.json` and VS Code will prompt you to install them when you open the project.
+**Testing**:
 
-**Auto-formatting is enabled by default:**
+- Vitest 4 (unit tests)
+- Playwright (E2E tests)
 
-- Format on save
-- ESLint auto-fix on save
+**Documentation**:
+
+- Compodoc
+- Storybook 10
+
+**Quality \u0026 Performance**:
+
+- Lighthouse CI
+- PWA (Angular Service Worker)
+- Commitlint
 
 ## 📄 License
 
@@ -260,9 +313,9 @@ This project is licensed under the MIT License - see the [LICENSE](LICENSE) file
 ## 📚 Additional Resources
 
 - [Angular Documentation](https://angular.dev)
-- [Angular CLI Overview](https://angular.dev/tools/cli)
 - [TypeScript Documentation](https://www.typescriptlang.org/docs)
 - [Vitest Documentation](https://vitest.dev)
+- [Playwright Documentation](https://playwright.dev)
 - [Conventional Commits](https://www.conventionalcommits.org)
 
 ---
