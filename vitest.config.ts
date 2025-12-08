@@ -1,8 +1,7 @@
 import { defineConfig } from 'vitest/config';
-import angular from '@angular/build/vitest';
 
 export default defineConfig({
-  plugins: [angular()],
+  plugins: [],
   test: {
     globals: true,
     environment: 'jsdom',
