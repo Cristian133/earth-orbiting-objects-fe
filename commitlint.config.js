@@ -23,5 +23,8 @@ export default {
     'subject-full-stop': [2, 'never', '.'],
     'type-empty': [2, 'never'],
     'scope-case': [2, 'always', 'lower-case'],
+    'header-max-length': [0, 'always', Infinity],
+    'body-max-length': [0, 'always', Infinity],
+    'footer-max-length': [0, 'always', Infinity],
   },
 };
