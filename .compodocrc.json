@@ -11,7 +11,5 @@
   "disableLifeCycleHooks": false,
   "disableRoutesGraph": false,
   "disableSearch": false,
-  "includes": "README.md",
-  "includesName": "Documentation",
   "customFavicon": "public/favicon.ico"
 }
