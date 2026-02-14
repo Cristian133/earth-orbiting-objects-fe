@@ -27,12 +27,21 @@ export class SatelliteService {
     }
 
     const positionEci = positionAndVelocity.position;
-    if (typeof positionEci === 'boolean') {
+    if (
+      typeof positionEci === 'boolean' ||
+      isNaN(positionEci.x) ||
+      isNaN(positionEci.y) ||
+      isNaN(positionEci.z)
+    ) {
       return null;
     }
 
     const gmst = satellite.gstime(date);
     const positionGd = satellite.eciToGeodetic(positionEci, gmst);
+
+    if (isNaN(positionGd.longitude) || isNaN(positionGd.latitude) || isNaN(positionGd.height)) {
+      return null;
+    }
 
     return {
       longitude: satellite.degreesLong(positionGd.longitude),
