@@ -1,6 +1,7 @@
 import type { ElementRef, OnInit, OnDestroy } from '@angular/core';
 import { ChangeDetectionStrategy, Component, ViewChild, inject } from '@angular/core';
 import * as Cesium from 'cesium';
+import { SATELLITE_TLES } from '../../core/constants/satellite.constants';
 import { SatelliteService } from '../../core/services/satellite.service';
 
 @Component({
@@ -43,8 +44,7 @@ export class MapComponent implements OnInit, OnDestroy {
     });
 
     // ISS Example
-    const tle1 = '1 25544U 98067A   24044.54228308  .00016147  00000-0  28781-3 0  9999';
-    const tle2 = '2 25544  51.6416 250.7189 0004184  38.2562  25.6888 15.49544834438991';
+    const { line1: tle1, line2: tle2 } = SATELLITE_TLES.ISS;
 
     const trajectory = this.satelliteService.getTrajectory(tle1, tle2, new Date(), 90);
     const positions = trajectory.map((p) =>

@@ -7,7 +7,8 @@ import { routes } from './app.routes';
 import { provideHttpAdapter } from './core/http';
 
 // Define the base URL for Cesium assets
-(window as unknown as { CESIUM_BASE_URL: string }).CESIUM_BASE_URL = '/cesium';
+const cesiumBaseUrl = '/cesium';
+(globalThis as unknown as { CESIUM_BASE_URL: string }).CESIUM_BASE_URL = cesiumBaseUrl;
 
 export const appConfig: ApplicationConfig = {
   providers: [
