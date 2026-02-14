@@ -3,7 +3,10 @@
     "collect": {
       "startServerCommand": "npm run build && npx http-server dist/object-orbiting-earth/browser -p 8080 -g",
       "url": ["http://localhost:8080"],
-      "numberOfRuns": 3
+      "numberOfRuns": 3,
+      "settings": {
+        "chromeFlags": "--no-sandbox --headless --disable-gpu --ignore-certificate-errors"
+      }
     },
     "assert": {
       "preset": "lighthouse:recommended",
